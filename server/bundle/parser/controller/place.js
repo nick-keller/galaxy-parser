@@ -5,7 +5,7 @@ module.exports = {
 };
 
 function parseAction(req, res, next) {
-    parse(req.body.sessid, function(err) {
+    parse(req.body.sessid, req.body.relatedplace, function(err) {
         if (err) {
             return next(err);
         }

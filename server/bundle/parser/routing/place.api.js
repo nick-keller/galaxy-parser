@@ -8,7 +8,7 @@ module.exports = {
         All: {
             path: '/parse',
             method: 'POST',
-            required_params: 'sessid',
+            required_params: ['sessid', 'relatedplace'],
             middleware: controller.parse
         }
     }
