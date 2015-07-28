@@ -1,4 +1,5 @@
 var apiHelper = require("../service/apiHelper");
+var _ = require("lodash");
 
 module.exports = requiredParams;
 
