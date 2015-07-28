@@ -58,11 +58,11 @@ function parse(sessid, relatedplace, callback) {
             var totalPlaces = 0;
 
             // Fetch each system
-            systems.forEach(function(system) {
+            systems.forEach(function(system, i) {
                 q.push(function(next) {
 
                     var sentAt = Date.now();
-                    console.log('Parsing system ' + system._id);
+                    console.log('Parsing system ' + system._id + ' (' + (i+1) + ' / ' + systems.length + ')');
 
                     request.get({
                         url: 'http://game.asylamba.com/s7/ajax/a-loadsystem/systemid-' + system._id + '/relatedplace-' + relatedplace,
