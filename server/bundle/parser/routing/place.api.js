@@ -1,7 +1,7 @@
-var controller = require('../controller/system');
+var controller = require('../controller/place');
 
 module.exports = {
-    endpoint: '/systems',
+    endpoint: '/places',
     params: {
     },
     actions: {
