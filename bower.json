@@ -1,0 +1,13 @@
+{
+  "name": "galaxy-parser",
+  "version": "0.0.0",
+  "homepage": "https://github.com/nick-keller/galaxy-parser",
+  "authors": [
+    "Nicolas Keller <nicolas.keller@edu.esiee.fr>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}

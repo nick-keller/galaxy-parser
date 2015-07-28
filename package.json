@@ -1,0 +1,23 @@
+{
+  "name": "galaxy-parser",
+  "version": "1.0.0",
+  "description": "Parse the entire galaxy",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nick-keller/galaxy-parser.git"
+  },
+  "author": "Nicolas Keller",
+  "bugs": {
+    "url": "https://github.com/nick-keller/galaxy-parser/issues"
+  },
+  "homepage": "https://github.com/nick-keller/galaxy-parser#readme",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "lodash": "^3.10.0",
+    "mongoose": "^4.1.0",
+    "morgan": "^1.6.1",
+    "queue": "^3.1.0"
+  }
+}
