@@ -187,6 +187,7 @@ function parse(sessid, relatedplace, callback) {
 
                 console.log('Parsed ' + totalCalls + ' systems');
                 console.log(totalPlaces + ' places found');
+                parsing = false;
             });
         });
     });
