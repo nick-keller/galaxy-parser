@@ -49,33 +49,38 @@ function parse(sessid, callback) {
         // Exec callback while we do the hard work
         callback();
 
-        var systems = body.match(/data-system-id="\d+" data-x-position="\d+" data-y-position="\d+"/g);
-        var q = queue();
-        var errors = 0;
+        // Remove every system first
+        System.remove({}, function() {
 
-        systems.forEach(function(system) {
-            q.push(function(next) {
-                var data = system.match(/data-system-id="(\d+)" data-x-position="(\d+)" data-y-position="(\d+)"/);
+            var systems = body.match(/data-system-id="\d+" data-x-position="\d+" data-y-position="\d+"/g);
+            var q = queue();
+            var errors = 0;
 
-                (new System({
-                    _id: data[1],
-                    x: data[2],
-                    y: data[3],
-                    dist: Math.sqrt(Math.pow(data[2] - config.center_of_galaxy.x, 2) + Math.pow(data[3] - config.center_of_galaxy.y, 2))
-                }))
-                .save(function(err) {
-                    if (err) {
-                        errors++;
-                    }
+            systems.forEach(function(system) {
+                q.push(function(next) {
+                    var data = system.match(/data-system-id="(\d+)" data-x-position="(\d+)" data-y-position="(\d+)"/);
 
-                    next();
+                    (new System({
+                        _id: data[1],
+                        x: data[2],
+                        y: data[3],
+                        dist: Math.sqrt(Math.pow(data[2] - config.center_of_galaxy.x, 2) + Math.pow(data[3] - config.center_of_galaxy.y, 2))
+                    }))
+                        .save(function(err) {
+                            if (err) {
+                                errors++;
+                            }
+
+                            next();
+                        });
                 });
             });
-        });
 
-        q.start(function() {
-            console.log('Saved ' + systems.length + ' systems.');
-            parsing = false;
+            q.start(function() {
+                console.log('Saved ' + (systems.length - errors) + ' systems.');
+                console.log('Failed to save ' + errors + ' systems.');
+                parsing = false;
+            });
         });
     });
 }
