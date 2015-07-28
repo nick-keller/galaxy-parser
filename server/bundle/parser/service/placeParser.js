@@ -47,7 +47,7 @@ function parse(sessid, relatedplace, callback) {
         // Exec callback while we do the hard work
         callback();
 
-        System.find({}).sort({ dist: 1 }).limit(2).exec(function(err, systems) {
+        System.find({}).sort({ dist: 1 }).exec(function(err, systems) {
             if(err) {
                 return console.log(err);
             }
