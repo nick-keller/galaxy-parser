@@ -79,6 +79,10 @@ function searchAction(req, res, next) {
         ]});
     }
 
+    if(!query.$and.length) {
+        delete query.$and.length;
+    }
+
     Place.find(query, function(err, places) {
         if(err) {
             return next(apiError.mongooseError(err));
