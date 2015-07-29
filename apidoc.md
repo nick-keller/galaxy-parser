@@ -60,3 +60,31 @@ Parameters
 * level (string) - Commander level
 * pev (int) - PEV
 * compo (*) - Ships
+
+Search place
+============
+
+Search a place.
+
+```
+[POST] /api/places/search
+```
+
+Parameters
+----------
+
+* from ({x: int, y: int}, required) - Coordinates of the place to look by (30 LY max)
+* habitable (boolean) - If set, select only habitable or non-habitable
+* available (boolean) - If set, select only available or non-available
+
+* population ([int]) - If set, select only places with population in array
+* defense ([int]) - If set, select only places with defense in array
+* resource ([int]) - If set, select only places with resource in array
+* science ([int]) - If set, select only places with science in array
+
+* inhabitants (int) - If set, select only places with at least that many inhabitants or unknown number of inhabitants
+* resource_ratio (int) - If set, select only places with at least this resource ratio or unknown resource ratio
+* science_bonus (int) - If set, select only places with at least this science bonus or unknown science bonus
+
+* warehouses (int) - If set, select only places with at least this many resources in warehouses or unknown resources
+* first_line ({min: int, max: int}) - If set, select only places where first line PEV is between min and max, default 0-Infinity
