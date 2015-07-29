@@ -16,9 +16,10 @@ function searchAction(req, res, next) {
         y: {
             $gte: req.body.from.y -30,
             $lte: req.body.from.y +30
-        },
-        $and: []
+        }
     };
+
+    var $and = [];
 
     if(req.body.habitable !== undefined) {
         query.habitable = req.body.habitable;
@@ -45,42 +46,42 @@ function searchAction(req, res, next) {
     }
 
     if(req.body.inhabitants !== undefined) {
-        query.$and.push({$or: [
+        $and.push({$or: [
             { inhabitants: {$exists: false} },
             { inhabitants: {$gte: req.body.inhabitants}}
         ]});
     }
 
     if(req.body.resource_ratio !== undefined) {
-        query.$and.push({$or: [
+        $and.push({$or: [
             { resource_ratio: {$exists: false} },
             { resource_ratio: {$gte: req.body.resource_ratio}}
         ]});
     }
 
     if(req.body.science_bonus !== undefined) {
-        query.$and.push({$or: [
+        $and.push({$or: [
             { science_bonus: {$exists: false} },
             { science_bonus: {$gte: req.body.science_bonus}}
         ]});
     }
 
     if(req.body.warehouses !== undefined) {
-        query.$and.push({$or: [
+        $and.push({$or: [
             { warehouses: {$exists: false} },
             { warehouses: {$gte: req.body.warehouses}}
         ]});
     }
 
     if(req.body.first_line !== undefined) {
-        query.$and.push({$or: [
+        $and.push({$or: [
             { 'first_line.pev': {$exists: false} },
             { 'first_line.pev': {$gte: req.body.first_line.min, $lte: req.body.first_line.max}}
         ]});
     }
 
-    if(!query.$and.length) {
-        delete query.$and.length;
+    if($and.length) {
+        query.$and = $and;;
     }
 
     Place.find(query, function(err, places) {
