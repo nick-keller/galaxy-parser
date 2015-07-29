@@ -5,7 +5,7 @@ module.exports = {
     params: {
     },
     actions: {
-        All: {
+        Parse: {
             path: '/parse',
             method: 'POST',
             required_params: 'sessid',
