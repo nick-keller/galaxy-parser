@@ -21,28 +21,40 @@ function searchAction(req, res, next) {
 
     var $and = [];
 
+    if(req.body.available !== undefined && req.body.habitable !== false) {
+        query.owner = { $exists: !req.body.available};
+    }
+
     if(req.body.habitable !== undefined) {
         query.habitable = req.body.habitable;
     }
 
-    if(req.body.available !== undefined) {
-        query.owner = { $exists: !req.body.available};
-    }
-
     if(req.body.population) {
-        query.population = { $in: req.body.population};
+        $and.push({$or: [
+            {population: { $in: req.body.population }},
+            {population: { $exists: false }}
+        ]});
     }
 
     if(req.body.defense) {
-        query.defense = { $in: req.body.defense};
+        $and.push({$or: [
+            {defense: { $in: req.body.defense }},
+            {defense: { $exists: false }}
+        ]});
     }
 
     if(req.body.resource) {
-        query.resource = { $in: req.body.resource};
+        $and.push({$or: [
+            {resource: { $in: req.body.resource }},
+            {resource: { $exists: false }}
+        ]});
     }
 
     if(req.body.science) {
-        query.science = { $in: req.body.science};
+        $and.push({$or: [
+            {science: { $in: req.body.science }},
+            {science: { $exists: false }}
+        ]});
     }
 
     if(req.body.inhabitants !== undefined) {

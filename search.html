@@ -5,39 +5,240 @@
     <title>Search</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/fr.js"></script>
 </head>
 <body ng-controller="SearchController as ctrl">
 
 <div class="container">
     <h1>Faire une recherche</h1>
     <form>
+        <h3>Ou chercher</h3>
+        <p>La recherche s'effectue 30 AL autour de ce point.</p>
         <div class="form-group">
             <label>Votre position</label>
-            <input class="form-control" placeholder="x" ng-model="search.from.x">
-            <input class="form-control" placeholder="y" ng-model="search.from.y">
+            <div class="row">
+                <div class="col-md-2">
+                    <input class="form-control" placeholder="x" ng-model="search.from.x">
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" placeholder="y" ng-model="search.from.y">
+                </div>
+            </div>
         </div>
+
+        <hr>
+
+        <h3>Filtres</h3>
+
+        <label>Caractéristiques</label>
         <div class="checkbox">
             <label>
                 <input type="checkbox" ng-model="search.habitable"> Colonisable
             </label>
         </div>
-        <div class="checkbox">
+        <div class="checkbox" ng-if="search.habitable">
             <label>
                 <input type="checkbox" ng-model="search.available"> Libre
             </label>
         </div>
+
+        <div ng-if="search.habitable">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Défense</label>
+                        <select multiple ng-model="search.defense" style="width:100%">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Population</label>
+                        <select multiple ng-model="search.population" style="width:100%">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Resources</label>
+                        <select multiple ng-model="search.resource" style="width:100%">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Sciences</label>
+                        <select multiple ng-model="search.science" style="width:100%">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <h3>Utiliser les rapports d'espionages</h3>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Nombre minimum d'habitants</label>
+                        <input class="form-control" ng-model="search.inhabitants">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Coeff. ressource minimal</label>
+                        <input class="form-control" ng-model="search.resource_ratio">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Bonus de science minimal</label>
+                        <input class="form-control" ng-model="search.science_bonus">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Ressources minimum dans les entrepôts</label>
+                        <input class="form-control" ng-model="search.warehouses">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Nombre de PEV de la première ligne</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" placeholder="Min" ng-model="search.first_line.min">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" placeholder="Max" ng-model="search.first_line.max">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-danger">{{ error }}</p>
+
+        <button class="btn btn-primary" ng-click="ctrl.search()">
+            Rechercher
+        </button>
+
+        <span ng-if="loading">Recherche en cours...</span>
     </form>
-    <pre>{{ search | json }}</pre>
 </div>
+
+    <div ng-if="places.length | orderBy : 'dist'" style="margin: 100px 20px 20px 20px">
+        <h1>{{places.length}} Résultats</h1>
+
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>Coordonnées</th>
+                <th>Distance (AL)</th>
+                <th>Nom</th>
+                <th>Def</th>
+                <th>Pop</th>
+                <th>Res</th>
+                <th>Sci</th>
+                <th>Dernière mise à jour</th>
+            </tr>
+            <tr ng-repeat="place in places">
+                <td>
+                    <a href="http://game.asylamba.com/s7/map/place-{{ place._id}}">
+                        {{ place.coordinates }}
+                    </a>
+                </td>
+                <td>{{ place.dist | number : 0 }}</td>
+                <td>
+                    <a href="http://game.asylamba.com/s7/map/place-{{ place._id}}">
+                        {{ place.name }}
+                    </a>
+                    <span nf-if="place.owner">
+                        <a href="http://game.asylamba.com/s7/embassy/player-{{place.owner.id}}">{{ place.owner.name}}</a>
+                    </span>
+                </td>
+                <td><img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/defense.png" ng-repeat="i in ctrl.range(place.defense) track by $index"></td>
+                <td><img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/population.png" ng-repeat="i in ctrl.range(place.population) track by $index"></td>
+                <td><img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/resource.png" ng-repeat="i in ctrl.range(place.resource) track by $index"></td>
+                <td><img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/science.png" ng-repeat="i in ctrl.range(place.science) track by $index"></td>
+                <td>{{ place.last_update }}</td>
+            </tr>
+        </table>
+    </div>
 
 
     <script>
         angular.module('search', [])
-                .controller('SearchController', function($scope) {
+                .controller('SearchController', function($scope, $http) {
                     $scope.search = {
                         habitable: true,
-                        available: true
+                        available: true,
+                        defense: '1 2 3 4 5'.split(' '),
+                        population: '1 2 3 4 5'.split(' '),
+                        resource: ['5'],
+                        science: '1 2 3 4 5'.split(' '),
+                        from: {x: 219, y:202},
+                        warehouses: 0
                     };
+
+                    $scope.loading = false;
+
+                    this.range = function(i) {
+                        return _.fill(new Array(i), 0);
+                    };
+
+                    this.search = function() {
+
+                        $scope.loading = true;
+
+                        $http.post('http://glx.naj.ovh/api/places/search', $scope.search).
+                                success(function(data) {
+
+                                    $scope.loading = false;
+                                    $scope.error = '';
+
+                                    data.forEach(function(place) {
+                                        place.dist = Math.sqrt(Math.pow(place.x - $scope.search.from.x, 2) + Math.pow(place.y - $scope.search.from.y, 2));
+                                        place.coordinates = '(' + _.get(place, 'sector', 'xx') + ') ' + place.x + ':' + place.y + ':' + _.get(place, 'position', 'x');
+                                        place.last_update = moment(place.last_checked).fromNow();
+                                    });
+
+                                    $scope.places = data;
+                                }).
+                                error(function(data) {
+
+                                    $scope.loading = false;
+                                    $scope.error = data.message;
+                                    console.log(data);
+                                });
+                    }
                 });
     </script>
 </body>
