@@ -155,8 +155,11 @@
     </form>
 </div>
 
-    <div ng-if="places.length | orderBy : 'dist'" style="margin: 100px 20px 20px 20px">
+    <div ng-if="places.length" style="margin-top: 100px" ng-class="{'container-fluid':large, container:!large}" ng-init="large = false">
         <h1>{{places.length}} Résultats</h1>
+        <button ng-click="large = !large" class="btn btn-primary" style="margin-bottom: 20px">
+            <i ng-class="{'glyphicon-resize-full':!large, 'glyphicon-resize-small':large}" class="glyphicon"></i>
+        </button>
 
         <table class="table table-striped table-bordered table-hover">
             <tr>
@@ -169,7 +172,7 @@
                 <th>Sci</th>
                 <th>Dernière mise à jour</th>
             </tr>
-            <tr ng-repeat="place in places">
+            <tr ng-repeat="place in places  | orderBy : 'dist'">
                 <td>
                     <a href="http://game.asylamba.com/s7/map/place-{{ place._id}}">
                         {{ place.coordinates }}
