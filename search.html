@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="search">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+</head>
+<body ng-controller="SearchController as ctrl">
+
+<div class="container">
+    <h1>Faire une recherche</h1>
+    <form>
+        <div class="form-group">
+            <label>Votre position</label>
+            <input class="form-control" placeholder="x" ng-model="search.from.x">
+            <input class="form-control" placeholder="y" ng-model="search.from.y">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="search.habitable"> Colonisable
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="search.available"> Libre
+            </label>
+        </div>
+    </form>
+    <pre>{{ search | json }}</pre>
+</div>
+
+
+    <script>
+        angular.module('search', [])
+                .controller('SearchController', function($scope) {
+                    $scope.search = {
+                        habitable: true,
+                        available: true
+                    };
+                });
+    </script>
+</body>
+</html>
