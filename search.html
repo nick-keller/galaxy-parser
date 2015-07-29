@@ -48,9 +48,14 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group" ng-init="c1 = true">
                         <label>Défense</label>
-                        <select multiple ng-model="search.defense" style="width:100%">
+                        <div class="checkbox" ng-click="search.defense = ['1','2','3','4','5']">
+                            <label>
+                                <input type="checkbox" ng-model="c1"> Peut importe
+                            </label>
+                        </div>
+                        <select multiple ng-model="search.defense" style="width:100%" ng-hide="c1">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -60,9 +65,14 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group" ng-init="c2 = true">
                         <label>Population</label>
-                        <select multiple ng-model="search.population" style="width:100%">
+                        <div class="checkbox" ng-click="search.population = ['1','2','3','4','5']">
+                            <label>
+                                <input type="checkbox" ng-model="c2"> Peut importe
+                            </label>
+                        </div>
+                        <select multiple ng-model="search.population" style="width:100%" ng-hide="c2">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -72,9 +82,14 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group" ng-init="c3 = true">
                         <label>Resources</label>
-                        <select multiple ng-model="search.resource" style="width:100%">
+                        <div class="checkbox" ng-click="search.resource = ['1','2','3','4','5']">
+                            <label>
+                                <input type="checkbox" ng-model="c3"> Peut importe
+                            </label>
+                        </div>
+                        <select multiple ng-model="search.resource" style="width:100%" ng-hide="c3">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -84,9 +99,14 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group" ng-init="c4 = true">
                         <label>Sciences</label>
-                        <select multiple ng-model="search.science" style="width:100%">
+                        <div class="checkbox" ng-click="search.science = ['1','2','3','4','5']">
+                            <label>
+                                <input type="checkbox" ng-model="c4"> Peut importe
+                            </label>
+                        </div>
+                        <select multiple ng-model="search.science" style="width:100%" ng-hide="c4">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -100,6 +120,12 @@
             <hr>
 
             <h3>Utiliser les rapports d'espionages</h3>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="search.with_report"> Seulement les planètes espionées
+                </label>
+            </div>
 
             <div class="row">
                 <div class="col-md-4">
@@ -205,7 +231,7 @@
                         available: true,
                         defense: '1 2 3 4 5'.split(' '),
                         population: '1 2 3 4 5'.split(' '),
-                        resource: ['5'],
+                        resource: '1 2 3 4 5'.split(' '),
                         science: '1 2 3 4 5'.split(' '),
                         from: {x: 219, y:202},
                         warehouses: 0

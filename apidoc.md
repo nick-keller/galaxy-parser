@@ -76,6 +76,7 @@ Parameters
 * from ({x: int, y: int}, required) - Coordinates of the place to look by (30 LY max)
 * habitable (boolean) - If set, select only habitable or non-habitable
 * available (boolean) - If set, select only available or non-available
+* with_report (boolean) - If set and true, select only places with reports
 
 * population ([int]) - If set, select only places with population in array
 * defense ([int]) - If set, select only places with defense in array

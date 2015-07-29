@@ -21,6 +21,10 @@ function searchAction(req, res, next) {
 
     var $and = [];
 
+    if(req.body.with_report) {
+        query.last_report = { $exists: true };
+    }
+
     if(req.body.available !== undefined && req.body.habitable !== false) {
         query.owner = { $exists: !req.body.available};
     }
