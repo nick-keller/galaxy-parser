@@ -2,7 +2,6 @@ var express = require('express');
 var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
-var cors = require("./controller/corsController");
 var requiredParams = require("./middleware/requiredParams");
 
 var restful = express();
@@ -11,9 +10,6 @@ module.exports = restful;
 init();
 
 function init() {
-
-    // Allow cross-origin resource sharing
-    restful.use(cors);
     var entities = getEntities();
 
     entities.forEach(function(entity) {

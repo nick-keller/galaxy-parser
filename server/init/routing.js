@@ -1,10 +1,12 @@
 var express = require("express");
 var path = require('path');
 var api = require('./../bundle/api/restful');
+var cors = require("./../bundle/api/controller/corsController");
 
 module.exports = init;
 
 function init(app) {
+    app.use(cors);
     app.use('/api', api);
     app.use(express.static(path.join(__dirname, '../../client/public')));
     app.use('/', serveSearch);
