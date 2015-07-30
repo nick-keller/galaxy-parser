@@ -41,10 +41,8 @@ function postAction (req, res, next) {
             data.position = coordinates[2];
         }
 
-        console.log('data.first_line avant filtre');
-        console.log(data.first_line);
-
-        if(data.first_line) {
+        if(req.body.first_line) {
+            data.first_line = req.body.first_line;
             _.remove(data.first_line, function(slot) {
                 if(!slot) {
                     return false;
@@ -56,10 +54,8 @@ function postAction (req, res, next) {
             });
         }
 
-        console.log('data.first_line après filtre');
-        console.log(data.first_line);
-
-        if(data.second_line) {
+        if(req.body.second_line) {
+            data.second_line = req.body.second_line;
             _.remove(data.second_line, function(slot) {
                 if(!slot) {
                     return false;
