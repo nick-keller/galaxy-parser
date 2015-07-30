@@ -41,12 +41,28 @@ function postAction (req, res, next) {
             data.position = coordinates[2];
         }
 
-        if(_.every(_.get(req.body, 'first_line.compo'), function(a){return a == -1;})) {
-            delete req.body.first_line.compo;
+        if(req.body.first_line) {
+            _.remove(req.body.first_line, function(slot) {
+                if(!slot) {
+                    return false;
+                }
+
+                return _.some(slot.compo, function(a){
+                    return a==-1;
+                });
+            });
         }
 
-        if(_.every(_.get(req.body, 'second_line.compo'), function(a){return a == -1;})) {
-            delete req.body.second_line.compo;
+        if(req.body.second_line) {
+            _.remove(req.body.second_line, function(slot) {
+                if(!slot) {
+                    return false;
+                }
+
+                return _.some(slot.compo, function(a){
+                    return a==-1;
+                });
+            });
         }
 
         Place.update(
