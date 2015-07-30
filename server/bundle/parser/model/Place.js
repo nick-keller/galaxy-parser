@@ -5,7 +5,7 @@ var CommanderSchema = new Schema({
     name: String,
     level: String,
     pev: Number,
-    compo: Schema.Types.Mixed
+    compo: [Number]
 }, { _id: false });
 
 var PlaceSchema = new Schema({
