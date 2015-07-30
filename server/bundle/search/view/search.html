@@ -14,7 +14,7 @@
 <div class="container">
     <h1>Faire une recherche</h1>
     <form>
-        <h3>Ou chercher</h3>
+        <h3>Où chercher</h3>
         <p>La recherche s'effectue 30 AL autour de ce point.</p>
         <div class="form-group">
             <label>Votre position</label>
@@ -52,7 +52,7 @@
                         <label>Défense</label>
                         <div class="checkbox" ng-click="search.defense = ['1','2','3','4','5']">
                             <label>
-                                <input type="checkbox" ng-model="c1"> Peut importe
+                                <input type="checkbox" ng-model="c1"> Peu importe
                             </label>
                         </div>
                         <select multiple ng-model="search.defense" style="width:100%" ng-hide="c1">
@@ -69,7 +69,7 @@
                         <label>Population</label>
                         <div class="checkbox" ng-click="search.population = ['1','2','3','4','5']">
                             <label>
-                                <input type="checkbox" ng-model="c2"> Peut importe
+                                <input type="checkbox" ng-model="c2"> Peu importe
                             </label>
                         </div>
                         <select multiple ng-model="search.population" style="width:100%" ng-hide="c2">
@@ -83,10 +83,10 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group" ng-init="c3 = true">
-                        <label>Resources</label>
+                        <label>Ressources</label>
                         <div class="checkbox" ng-click="search.resource = ['1','2','3','4','5']">
                             <label>
-                                <input type="checkbox" ng-model="c3"> Peut importe
+                                <input type="checkbox" ng-model="c3"> Peu importe
                             </label>
                         </div>
                         <select multiple ng-model="search.resource" style="width:100%" ng-hide="c3">
@@ -103,7 +103,7 @@
                         <label>Sciences</label>
                         <div class="checkbox" ng-click="search.science = ['1','2','3','4','5']">
                             <label>
-                                <input type="checkbox" ng-model="c4"> Peut importe
+                                <input type="checkbox" ng-model="c4"> Peu importe
                             </label>
                         </div>
                         <select multiple ng-model="search.science" style="width:100%" ng-hide="c4">
@@ -119,11 +119,11 @@
 
             <hr>
 
-            <h3>Utiliser les rapports d'espionages</h3>
+            <h3>Utiliser les rapports d'espionnage</h3>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="search.with_report"> Seulement les planètes espionées
+                    <input type="checkbox" ng-model="search.with_report"> Seulement les planètes espionnées
                 </label>
             </div>
 
@@ -142,7 +142,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Bonus de science minimal</label>
+                        <label>Bonus de sciences minimal</label>
                         <input class="form-control" ng-model="search.science_bonus">
                     </div>
                 </div>
@@ -208,16 +208,16 @@
             </tr>
             <tr ng-repeat="place in places  | orderBy : 'dist'">
                 <td>
-                    <a href="http://game.asylamba.com/s7/map/place-{{ place._id}}">
+                    <a target="_blank" href="http://game.asylamba.com/s7/map/place-{{ place._id}}">
                         {{ place.coordinates }}
                     </a>
                 </td>
                 <td>{{ place.dist | number : 0 }}</td>
                 <td>
-                    <a href="http://game.asylamba.com/s7/map/place-{{ place._id}}">{{ place.name }}</a>
+                    <a target="_blank" href="http://game.asylamba.com/s7/map/place-{{ place._id}}">{{ place.name }}</a>
                     <span nf-if="place.owner">
                         propriété du Citoyen
-                        <a href="http://game.asylamba.com/s7/embassy/player-{{place.owner.id}}">{{ place.owner.name}}</a>
+                        <a target="_blank" href="http://game.asylamba.com/s7/embassy/player-{{place.owner.id}}">{{ place.owner.name}}</a>
                     </span>
                 </td>
 
