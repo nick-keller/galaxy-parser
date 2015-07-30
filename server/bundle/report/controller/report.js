@@ -41,6 +41,14 @@ function postAction (req, res, next) {
             data.position = coordinates[2];
         }
 
+        if(_.every(req.body.first_line.compo, function(a){return a == -1;})) {
+            delete req.body.first_line.compo;
+        }
+
+        if(_.every(req.body.second_line.compo, function(a){return a == -1;})) {
+            delete req.body.second_line.compo;
+        }
+
         Place.update(
             {_id: req.body.place_id},
             {$set: data},
