@@ -92,7 +92,7 @@ function searchAction(req, res, next) {
     if(req.body.first_line !== undefined) {
         $and.push({$or: [
             { 'first_line.pev': {$exists: false} },
-            { 'first_line.pev': {$gte: req.body.first_line.min, $lte: req.body.first_line.max}}
+            { 'first_line.pev': {$gte: req.body.first_line.min || 0, $lte: req.body.first_line.max || 999999}}
         ]});
     }
 
