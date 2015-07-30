@@ -206,10 +206,9 @@
                 </td>
                 <td>{{ place.dist | number : 0 }}</td>
                 <td>
-                    <a href="http://game.asylamba.com/s7/map/place-{{ place._id}}">
-                        {{ place.name }}
-                    </a>
+                    <a href="http://game.asylamba.com/s7/map/place-{{ place._id}}">{{ place.name }}</a>
                     <span nf-if="place.owner">
+                        propriété du Citoyen
                         <a href="http://game.asylamba.com/s7/embassy/player-{{place.owner.id}}">{{ place.owner.name}}</a>
                     </span>
                 </td>
