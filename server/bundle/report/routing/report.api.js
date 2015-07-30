@@ -10,6 +10,11 @@ module.exports = {
             method: 'POST',
             required_params: ['report_id', 'place_id'],
             middleware: controller.post
+        },
+        Last: {
+            path: '/:id',
+            method: 'GET',
+            middleware: controller.last
         }
     }
 };

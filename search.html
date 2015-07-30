@@ -196,6 +196,14 @@
                 <th>Pop</th>
                 <th>Res</th>
                 <th>Sci</th>
+                <th>Habitants</th>
+                <th>Coeff. res</th>
+                <th>Bonus sci</th>
+                <th>Entrepôts</th>
+                <th>Contre-esp</th>
+                <th>Routes comm</th>
+                <th>1er ligne</th>
+                <th>2em ligne</th>
                 <th>Dernière mise à jour</th>
             </tr>
             <tr ng-repeat="place in places  | orderBy : 'dist'">
@@ -217,6 +225,16 @@
                 <td><img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/population.png" ng-repeat="i in ctrl.range(place.population) track by $index"></td>
                 <td><img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/resource.png" ng-repeat="i in ctrl.range(place.resource) track by $index"></td>
                 <td><img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/science.png" ng-repeat="i in ctrl.range(place.science) track by $index"></td>
+
+                <td>{{ place.inhabitants }}</td>
+                <td>{{ place.resource_ratio }}%</td>
+                <td>{{ place.science_bonus }}%</td>
+                <td>{{ place.warehouses }} <img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/resource.png"></td>
+                <td>{{ place.counterintelligence }} <img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/credit.png"></td>
+                <td>{{ place.trade_routes }} <img style="width: 16px" src="http://game.asylamba.com/s7/public/media/resources/credit.png"></td>
+                <td><div ng-repeat="compo in place.first_line">{{ compo.pev }} PEV</div></td>
+                <td><div ng-repeat="compo in place.second_line">{{ compo.pev }} PEV</div></td>
+
                 <td>{{ place.last_update }}</td>
             </tr>
         </table>

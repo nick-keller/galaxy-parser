@@ -4,7 +4,8 @@ var apiError = require('../../api/service/apiError');
 var _ = require('lodash');
 
 module.exports = {
-    post: postAction
+    post: postAction,
+    last: lastAction
 };
 
 function postAction (req, res, next) {
@@ -54,5 +55,29 @@ function postAction (req, res, next) {
                 });
             }
         );
+    });
+}
+
+function lastAction(req, res, next) {
+    Place.findOne({_id: req.params.id}, function(err, place) {
+        if(err) {
+            return next(apiError.mongooseError(err));
+        }
+
+        if(!place) {
+            return next({
+                status: 404,
+                message: 'Cette planète n\'est pas référencée.'
+            });
+        }
+
+        if(!place.last_report) {
+            return next({
+                status: 404,
+                message: 'Aucun raport d\'espionage pour cette planète.'
+            });
+        }
+
+        res.json(place);
     });
 }
