@@ -7,9 +7,14 @@ module.exports = init;
 function init(app) {
     app.use('/api', api);
     app.use(express.static(path.join(__dirname, '../../client/public')));
+    app.use('/', serveSearch);
     app.use(notFound);
     app.use(logErrors);
     app.use(errorHandler);
+}
+
+function serveSearch(req, res, next) {
+    res.sendFile(path.join(__dirname, '../bundle/search/view/search.html'));
 }
 
 function notFound(req, res, next) {

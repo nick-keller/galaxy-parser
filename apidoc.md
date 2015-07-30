@@ -61,6 +61,14 @@ Parameters
 * pev (int) - PEV
 * compo (*) - Ships
 
+Get report
+==========
+
+```
+[GET] /api/reports/{place_id}
+```
+
+
 Search place
 ============
 
