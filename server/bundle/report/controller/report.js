@@ -21,7 +21,7 @@ function postAction (req, res, next) {
         }
 
         // Outdated report
-        if(req.body.report_id <= place.last_report) {
+        if(req.body.report_id < place.last_report) {
             return next({
                 status: 200,
                 message: 'Il y a déjà un raport plus récent.'
