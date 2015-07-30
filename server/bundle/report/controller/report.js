@@ -41,11 +41,11 @@ function postAction (req, res, next) {
             data.position = coordinates[2];
         }
 
-        if(_.every(req.body.first_line.compo, function(a){return a == -1;})) {
+        if(_.every(_.get(req.body, 'first_line.compo'), function(a){return a == -1;})) {
             delete req.body.first_line.compo;
         }
 
-        if(_.every(req.body.second_line.compo, function(a){return a == -1;})) {
+        if(_.every(_.get(req.body, 'second_line.compo'), function(a){return a == -1;})) {
             delete req.body.second_line.compo;
         }
 
