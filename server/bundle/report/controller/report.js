@@ -35,7 +35,7 @@ function postAction (req, res, next) {
         data.last_report = req.body.report_id;
 
         if(req.body.coordinates) {
-            var coordinates = coordinates.match(/^.(\d+). \d+:\d+:(\d+)$/);
+            var coordinates = req.body.coordinates.match(/^.(\d+). \d+:\d+:(\d+)$/);
             data.sector = coordinates[1];
             data.position = coordinates[2];
         }

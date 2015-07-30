@@ -97,7 +97,7 @@ function searchAction(req, res, next) {
     }
 
     if($and.length) {
-        query.$and = $and;;
+        query.$and = $and;
     }
 
     Place.find(query, function(err, places) {
