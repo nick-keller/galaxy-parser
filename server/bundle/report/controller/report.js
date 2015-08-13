@@ -67,6 +67,26 @@ function postAction (req, res, next) {
             });
         }
 
+        if (req.body.sheds && req.body.sheds.compo) {
+            var pev      = 0;
+            var shipsPev = [2, 3, 3, 5, 7, 9, 23, 45, 75, 86, 82, 84];
+
+            for (var i = 0, c = req.body.sheds.compo.length; i < c; i++) {
+                if (req.body.sheds.compo[i] == -1) {
+                    req.body.sheds.compo = null;
+                    break;
+                }
+                pev += shipsPev[i] * req.body.sheds.compo[i];
+            }
+
+            if (req.body.sheds.compo !== null) {
+                data.sheds = {
+                    compo : req.body.sheds.compo,
+                    pev   : pev
+                };
+            }
+        }
+
         Place.update(
             {_id: req.body.place_id},
             {$set: data},

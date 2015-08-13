@@ -38,6 +38,10 @@ var PlaceSchema = new Schema({
 
     first_line: [CommanderSchema],
     second_line: [CommanderSchema],
+    sheds: { 
+        pev: Number,
+        compo: [Number]
+    },
 
     last_checked: {
         type: Date,
