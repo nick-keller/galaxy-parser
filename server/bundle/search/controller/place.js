@@ -10,12 +10,12 @@ module.exports = {
 function searchAction(req, res, next) {
     var query = {
         x: {
-            $gte: req.body.from.x -30,
-            $lte: req.body.from.x +30
+            $gte: parseInt(req.body.from.x) - 30,
+            $lte: parseInt(req.body.from.x) + 30
         },
         y: {
-            $gte: req.body.from.y -30,
-            $lte: req.body.from.y +30
+            $gte: parseInt(req.body.from.y) - 30,
+            $lte: parseInt(req.body.from.y) + 30
         }
     };
 
