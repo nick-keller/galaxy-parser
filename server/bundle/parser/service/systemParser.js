@@ -24,11 +24,11 @@ function parse(sessid, callback) {
     parsing = true;
 
     request.get({
-        url: 'http://game.asylamba.com/s9/map',
+        url: 'http://game.asylamba.com/s10/map',
         headers: {
             'User-Agent': userAgent,
             Origin: origin,
-            Referer: 'http://game.asylamba.com/s9/bases',
+            Referer: 'http://game.asylamba.com/s10/bases',
             Cookie: 'PHPSESSID=' + sessid
         },
         followRedirect: false
