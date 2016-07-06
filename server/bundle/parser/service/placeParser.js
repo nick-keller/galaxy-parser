@@ -24,7 +24,7 @@ function parse(sessid, relatedplace, callback) {
     parsing = true;
 
     request.get({
-        url: 'http://game.asylamba.com/s10/bases',
+        url: 'http://game.asylamba.com/s11/bases',
         headers: {
             'User-Agent': userAgent,
             Cookie: 'PHPSESSID=' + sessid
@@ -65,7 +65,7 @@ function parse(sessid, relatedplace, callback) {
                     console.log('Parsing system ' + system._id + ' (' + (i+1) + ' / ' + systems.length + ')');
 
                     request.get({
-                        url: 'http://game.asylamba.com/s10/ajax/a-loadsystem/systemid-' + system._id + '/relatedplace-' + relatedplace,
+                        url: 'http://game.asylamba.com/s11/ajax/a-loadsystem/systemid-' + system._id + '/relatedplace-' + relatedplace,
                         headers: {
                             Accept: '*/*',
                             'Accept-Language': 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4,',
@@ -106,7 +106,7 @@ function parse(sessid, relatedplace, callback) {
                             data.name = $this.find('p').first().text();
 
                             // Owner
-                            var owner = $this.html().match(/<a href="http:\/\/game\.asylamba\.com\/s10\/embassy\/player-(\d+)"[^>]*>([^<]+)<\/a>/);
+                            var owner = $this.html().match(/<a href="http:\/\/game\.asylamba\.com\/s11\/embassy\/player-(\d+)"[^>]*>([^<]+)<\/a>/);
                             if(owner) {
                                 data.owner = {
                                     id: owner[1],
@@ -137,11 +137,11 @@ function parse(sessid, relatedplace, callback) {
                             data.habitable = !!data.resource;
 
                             // Habitable places
-                            var placeId = $this.next().html().match(/http:\/\/game\.asylamba\.com\/s10\/action\/a-[^\/]+\/commanderid-\{id}\/placeid-(\d+)\//);
+                            var placeId = $this.next().html().match(/http:\/\/game\.asylamba\.com\/s11\/action\/a-[^\/]+\/commanderid-\{id}\/placeid-(\d+)\//);
 
                             // Non habitable places
                             if(!placeId) {
-                                placeId = $this.next().html().match(/http:\/\/game\.asylamba\.com\/s10\/action\/a-createmission\/rplace-\d+\/rtarget-(\d+)\//);
+                                placeId = $this.next().html().match(/http:\/\/game\.asylamba\.com\/s11\/action\/a-createmission\/rplace-\d+\/rtarget-(\d+)\//);
                             }
 
                             // Id
