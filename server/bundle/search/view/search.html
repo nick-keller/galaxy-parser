@@ -208,32 +208,32 @@
             </tr>
             <tr ng-repeat="place in places  | orderBy : 'dist'">
                 <td>
-                    <a target="_blank" href="http://game.asylamba.com/s11/map/place-{{ place._id}}">
+                    <a target="_blank" href="http://game.asylamba.com/s13/map/place-{{ place._id}}">
                         {{ place.coordinates }}
                     </a>
                 </td>
                 <td>{{ place.dist | number : 0 }}</td>
                 <td>
-                    <a target="_blank" href="http://game.asylamba.com/s11/map/place-{{ place._id}}">{{ place.name }}</a>
+                    <a target="_blank" href="http://game.asylamba.com/s13/map/place-{{ place._id}}">{{ place.name }}</a>
                     <span nf-if="place.owner">
                         propriété du Citoyen
-                        <a target="_blank" href="http://game.asylamba.com/s11/embassy/player-{{place.owner.id}}">{{ place.owner.name}}</a>
+                        <a target="_blank" href="http://game.asylamba.com/s13/embassy/player-{{place.owner.id}}">{{ place.owner.name}}</a>
                     </span>
                 </td>
 
                 <td ng-if="!place.habitable" colspan="4" class="active">Non applicable</td>
-                <td ng-if="place.habitable"><img style="width: 16px" src="http://game.asylamba.com/s11/public/media/resources/defense.png" ng-repeat="i in ctrl.range(place.defense) track by $index"></td>
-                <td ng-if="place.habitable"><img style="width: 16px" src="http://game.asylamba.com/s11/public/media/resources/population.png" ng-repeat="i in ctrl.range(place.population) track by $index"></td>
-                <td ng-if="place.habitable"><img style="width: 16px" src="http://game.asylamba.com/s11/public/media/resources/resource.png" ng-repeat="i in ctrl.range(place.resource) track by $index"></td>
-                <td ng-if="place.habitable"><img style="width: 16px" src="http://game.asylamba.com/s11/public/media/resources/science.png" ng-repeat="i in ctrl.range(place.science) track by $index"></td>
+                <td ng-if="place.habitable"><img style="width: 16px" src="http://game.asylamba.com/s13/public/media/resources/defense.png" ng-repeat="i in ctrl.range(place.defense) track by $index"></td>
+                <td ng-if="place.habitable"><img style="width: 16px" src="http://game.asylamba.com/s13/public/media/resources/population.png" ng-repeat="i in ctrl.range(place.population) track by $index"></td>
+                <td ng-if="place.habitable"><img style="width: 16px" src="http://game.asylamba.com/s13/public/media/resources/resource.png" ng-repeat="i in ctrl.range(place.resource) track by $index"></td>
+                <td ng-if="place.habitable"><img style="width: 16px" src="http://game.asylamba.com/s13/public/media/resources/science.png" ng-repeat="i in ctrl.range(place.science) track by $index"></td>
 
                 <td ng-if="!place.last_report" colspan="8" class="active">Pas encore de raport d'espionage</td>
                 <td ng-if="place.last_report">{{ place.inhabitants | number }}</td>
                 <td ng-if="place.last_report">{{ place.resource_ratio }}%</td>
                 <td ng-if="place.last_report">{{ place.science_bonus }}%</td>
-                <td ng-if="place.last_report">{{ place.warehouses }} <img style="width: 16px" src="http://game.asylamba.com/s11/public/media/resources/resource.png"></td>
-                <td ng-if="place.last_report">{{ place.counterintelligence }} <img style="width: 16px" src="http://game.asylamba.com/s11/public/media/resources/credit.png"></td>
-                <td ng-if="place.last_report">{{ place.trade_routes }} <img style="width: 16px" src="http://game.asylamba.com/s11/public/media/resources/credit.png"></td>
+                <td ng-if="place.last_report">{{ place.warehouses }} <img style="width: 16px" src="http://game.asylamba.com/s13/public/media/resources/resource.png"></td>
+                <td ng-if="place.last_report">{{ place.counterintelligence }} <img style="width: 16px" src="http://game.asylamba.com/s13/public/media/resources/credit.png"></td>
+                <td ng-if="place.last_report">{{ place.trade_routes }} <img style="width: 16px" src="http://game.asylamba.com/s13/public/media/resources/credit.png"></td>
                 <td ng-if="place.last_report"><div ng-repeat="compo in place.first_line">{{ compo.pev }} PEV</div></td>
                 <td ng-if="place.last_report"><div ng-repeat="compo in place.second_line">{{ compo.pev }} PEV</div></td>
 
@@ -253,7 +253,7 @@
                         population: '1 2 3 4 5'.split(' '),
                         resource: '1 2 3 4 5'.split(' '),
                         science: '1 2 3 4 5'.split(' '),
-                        from: {x: 25, y:107},
+                        from: {x: 232, y:217},
                         warehouses: 0
                     };
 
