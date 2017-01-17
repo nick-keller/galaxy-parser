@@ -85,7 +85,7 @@ function parse(sessid, relatedplace, callback) {
                         console.log('    Got response in ' + responseTime/1000 + ' s');
                         console.log('    Average response time ' + totalResponseTime/totalCalls/1000 + ' s');
 
-                        console.log(httpResponse);
+                        // console.log(httpResponse);
 
                         if(299 < httpResponse.statusCode) {
                             parsing = false;
