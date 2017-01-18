@@ -16,8 +16,8 @@ function init(app) {
 }
 
 function serveSearch(req, res, next) {
-    // res.sendFile(path.join(__dirname, '../bundle/search/view/search.html'));
-    res.status(404).send('404 Not found');
+    res.sendFile(path.join(__dirname, '../bundle/search/view/search.html'));
+    // res.status(404).send('404 Not found');
 }
 
 function notFound(req, res, next) {
